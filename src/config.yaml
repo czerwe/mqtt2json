@@ -1,0 +1,17 @@
+---
+broker:
+  host: mosquitto.service.consul
+  port: 1883
+topics:
+  "hm/status/env_draussen_muellhaus:1/TEMPERATURE":
+    type: temperature
+    name: draussen
+  "hm/status/env_draussen_muellhaus:1/HUMIDITY":
+    type: humidity
+    name: draussen
+  "hm/status/env_draussen_terrasse:1/ACTUAL_TEMPERATURE":
+    type: temperature
+    name: terrasse
+  "hm/status/env_draussen_terrasse:1/HUMIDITY":
+    type: humidity
+    name: terrasse

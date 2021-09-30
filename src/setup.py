@@ -1,6 +1,5 @@
 from setuptools import setup, find_packages
 
-
 setup(
     name="mqtt2json",
     version="0.1.0",
@@ -8,5 +7,13 @@ setup(
     author="cze",
     author_email="ernest@czerwonka.de",
     packages=find_packages(),
-    install_requires=["Flask<=2", "prometheus-flask-exporter", "paho-mqtt", "gunicorn", "pyyaml"],
+    install_requires=[
+        "Flask<=2",
+        "prometheus-flask-exporter",
+        "paho-mqtt",
+        "gunicorn",
+        "pyyaml",
+        "python-dateutil",
+        "pytz",
+    ],
 )
