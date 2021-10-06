@@ -11,6 +11,8 @@ from .grafana import GrafanaRequest
 from .mqtt import MqttSubscriber
 import mqtt2json.confighandler
 from .cache import cache
+from .confighandler import config
+from .aggregators import Aggregator
 
 app = Flask(__name__)
 
@@ -30,9 +32,8 @@ def root():
 
 @app.route("/search", methods=methods)
 def search():
-    # print('SEARCH')
-    req = GrafanaRequest(request.data)
-    retval = [cache[i].name for i in cache]
+    # req = GrafanaRequest(request.data)
+    retval = [cache[i].name for i in cache] + [ key for key in config.get('aggregator', {}).keys()]
     return jsonify(retval)
 
 
@@ -45,9 +46,16 @@ def query():
 
     for item in cache:
         if cache[item].name in req.targets():
-
             retval.append(cache[item].datapoint(req.start, req.stop))
             logger.info(f'Return Target "{retval[-1]["target"]}" with {len(retval[-1]["datapoints"])} items')
+
+    for akey in [akey for akey in config.get('aggregator', {}).keys() if akey in req.targets()]:
+        aggr = Aggregator(akey, config['aggregator'][akey])
+        retval.append(aggr.target(req.start, req.stop))
+
+    # pprint(cache)
+    # print('-----------------')
     # pprint(retval)
+    # print('-----------------')
     return jsonify(retval)
 

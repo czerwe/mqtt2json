@@ -23,26 +23,22 @@ class Tsdb(object):
     def add_value(self, json_payload):
         self.logger.info(f'got payload')
         payload = json.loads(json_payload)
-        # print('------')
-        # print(len(self._value))
-        # print(payload['ts'])
-
-        # print(datetime.fromtimestamp(payload['ts']/1000.0))
-
-        # self._value.append([payload["val"], datetime.fromtimestamp(payload['ts']/1000.0) ])
         self._value.append([payload["val"], payload['ts']])
 
-        # print(len(self._value))
-        # print('------+')
+    def latest(self, start, end):
+        existing_datapoints = self.datapoint(start, end)['datapoints']
+
+        retval = existing_datapoints[-1] if len(existing_datapoints) else []
+        return retval
+        return self.datapoint(start, end)['datapoints']
 
     def datapoint(self, start, end ):
         self.logger.info(f'start: {start}')
         self.logger.info(f'end: {end}')
         datapoints = [datapoint for datapoint in self._value if datapoint[1] >= start and datapoint[1] <= end]
-        pprint(self._value)
-        pprint(datapoints)
 
-        for d in self._value:
-            print(d[1])
+
+        # for d in self._value:
+        #     print(d[1])
         retVal = {'target': self.name, "datapoints": datapoints}
         return retVal

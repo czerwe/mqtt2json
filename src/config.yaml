@@ -15,3 +15,10 @@ topics:
   "hm/status/env_draussen_terrasse:1/HUMIDITY":
     type: humidity
     name: terrasse
+aggregator:
+  draussen_min:
+    type: min
+    metrics:
+      - draussen_temperature
+      - terrasse_temperature
+

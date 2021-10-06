@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="6177703c-e8f9-4fec-be49-f1e7b5e777af" name="rnode6">
+        <fileTransfer accessType="SFTP" host="rnode6" port="22" sshConfigId="6aff61e0-f904-441a-bcf8-97c7c7d9ce61" sshConfig="czerwe@rnode6:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

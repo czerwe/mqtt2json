@@ -32,9 +32,11 @@ class GrafanaRequest(object):
 
     @property
     def start(self):
-        return int(self._start.strftime("%s")) * 1000
+        self.logger.warning(self._start)
+        # self.logger.critical(self._start.timestamp())
+        return self._start.timestamp() * 1000
 
 
     @property
     def stop(self):
-        return int(self._stop.strftime("%s")) * 1000
+        return self._stop.timestamp() * 1000
